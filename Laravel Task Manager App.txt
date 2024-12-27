@@ -1,0 +1,201 @@
+@extends('layout.baseview') @section('title',ALL TASKS') @section('style')
+<style> .done{
+text- decoration: line-through
+}
+</style> @endsection @section('content')
+@include('layout.navigation')
+<div class="container mt-5">
+<button type="button" class="btn btn-outline-primary mb-5 end-0" onclick="addtask()">add
+task </button>
+<div class="card">
+<div class="class-body">
+<table class="table">
+<thead>
+<tr>
+<th scope="col">Si No.</th>
+<th scope="col">Task Description</th>
+<th scope="col">Task Owner</th>
+<th scope="col">Task ETA</th>
+<th scope="col">Action</th>
+<tr>
+</thead>
+<tbody id="tasktable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="modal fade" id="createTaskmodal" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<h5 class="modal-header">
+<button type="button" class="btn-close" date- bsdismiss="modal"></button>
+</h5>
+</div>
+</div>
+<div class="modal-body">
+<form>
+<div class="form-group">
+<label for="createTaskDescription">Task Description</label>
+<input type="text" class="form-control" id="createTaskDescription" placeholder="enter task
+description">
+</div>
+<div class="form-group">
+<label for="createTaskDescription">Task owner</label>
+<input type="text" class="form-control" id="createTaskowner" placeholder="enter task
+description">
+</div>
+<div class="form-group">
+<label for="createTaskDescription">Task owner email</label>
+<input type="text" class="form-control" id="createTaskemail" placeholder="enter task
+description">
+</div>
+<div class="form-group">
+<label for="createTaskDescription">Task ETA</label>
+<input type="text" class="form-control" id="createTaskETA" placeholder="enter task
+description">
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="edittaskmodal" tabindex+"-1">
+<div class ="modal-dialog">
+<div class="modal -content">
+<div class="modal-header">
+<hs class="modal-title">add task</hs>
+<button type="button"class="btn-cloe"data-bs- dismiss="modal"></button> </div>
+<div class="modal-body">
+<form>
+<div class="form-group">
+<label for="editTaskDescription">TaskDescription</label>
+<input type="Text" Class="form control"id="editTaskDescription" Placeholder="Enter
+TaskDescription">
+</div>
+<div class="form group">
+<label for="editTaskDescription">Task owner</label>
+<input type="Text" Class="form control"id="editTaskowner" Placeholder="Enter Task owner">
+</div>
+<div class="form-group">
+<label for="editTaskDescription">Task owner
+email</label>
+<input type="Text" Class="form control"id="editTask
+email" Placeholder="Enter Task owner email">
+</div>
+<div class="form-group">
+<label for="editTaskDescription">Task ETA</label>
+<input type="date" Class="form control"id="editTask ETA" Placeholder="Enter Task ETA">
+</div>
+<div class="form group">
+<label for="edittaskstatus">Taskstatus</label>
+<select class="form control" id=" edit taskstatus">
+<option> set task status</option>
+<option value= "0"> in progress done</option>
+<option value="1">Done</option>
+</div>
+</select>
+</select>
+</div>
+<input type="hidden" id="editTaskid">
+</form>
+</div><div class="modal-footer">
+<button type="button" class="btn btn-secondary" data- bsdismiss="modal">close</button>
+<button type="button" class="btn btn-primary" onclick="updateTask()">submit</button>
+</div>
+</div>
+</div>
+</div>
+<div class=" 'modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">add tASK</h5>
+<button type="button" class="btn close" data- bsdismiss="modal"></button>
+</div>
+<div class="modal-body">
+<input type="hidden" id="emailid">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> @endsection
+@section('customjs')
+<script>
+$(document).ready(function(){
+getALLTasks();
+})
+function getAllTasks(result){
+$.ajay({type:'get', url:'http://localhost:8080?api/task ', success:function(result){var html='';
+for(var i=0;i<result.length;i++){
+html+='<tr>'
++'<th scope="row">'+(i+1)+'</th>'
++'<td>'+result[i]['task_description']'</td>'
++'<td>'+result[i]['task_owner']'</td>'
++'<td>'+result[i]['task_eta']'</td>'
++'<td>'
++'<i class="bi bi-pencil-square" onclick="editTask('+result[i]['id']+')"></i>'
++'<i class="bi bi-check2-square" onclick="markasdone('+result[i]['id']+')"></i>'
++'<i class="bi bi-trash" onclick="delete Task('+result[i]['id']+')"></i>'
++' </td>'
++'</tr>'
+}
+$("#taskTable").html(html)
+} , error:function(e){ console.log(e.responseText) }
+}) } function addtask(){
+$("createTaskmodal").modal('show');
+} function createTask(){var task_description =
+$("createTaskDescription").val() var task_owner =
+$("createTaskOwner").val() var task_owner_email =
+$("createTaskEmail").val() var task_eta =
+$("createTaskETA").val()
+$.ajax({ type:'post',
+url:'http://localhost:80000/api/task', data:{ task_description:task_description,
+task_owner :task_owner, task_owner_email
+:task_owner_email, task_eta :task eta
+}, success: function(result){
+$("#createtaskmodel").modal('hide'); getalltasks():addtask
+}, error:function(e){ console.log(e.responseytext)
+}
+}) }
+function edittask(id){
+</div>
+</div>
+</div>
+<div class="modal fade" id="edittaskmodal" tabindex+"-1">
+<div class ="modal-dialog">
+<div class="modal -content">
+<div class="modal-header">
+<hs class="modal-title">add task</hs>
+<button type="button"class="btn-cloe"data-bs- dismiss="modal"></button> </div>
+<div class="modal-body">
+<form>
+<div class="form-group">
+<label for="editTaskDescription">TaskDescription</label>
+<input type="Text" Class="form control"id="editTaskDescription" Placeholder="Enter
+TaskDescription">
+</div>
+<div class="form group">
+<label for="editTaskDescription">Task owner</label>
+<input type="Text" Class="form control"id="editTaskowner" Placeholder="Enter Task owner">
+</div>
+<div class="form-group">
+<label for="editTaskDescription">Task owner
+email</label>
+<input type="Text" Class="form control"id="editTask email" Placeholder="Enter Task owner
+email">
+</div>
+<div class="form-group">
+<label for="editTaskDescription">Task ETA</label>
+<input type="date" Class="form control"id="editTask ETA" Placeholder="Enter Task ETA">
+</div>
+<div class="form group">
+<label for="edittaskstatus">Taskstatus</label>
+<select class="form control" id=" edit taskstatus">
+<option> set task status</option>
+<option value= "0"> in progress done</option>
+}
+})
+}
+</script>
+@endsection
